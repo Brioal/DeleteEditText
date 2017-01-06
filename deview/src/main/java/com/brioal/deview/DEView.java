@@ -36,7 +36,7 @@ public class DEView extends android.support.v7.widget.AppCompatEditText {
         if (mDrawable == null) {
             mDrawable = getResources().getDrawable(R.drawable.ic_clear);
         }
-        Drawable[] icons = getCompoundDrawables();
+        final Drawable[] icons = getCompoundDrawables();
         icons[2] = mDrawable;
         mDrawable.setBounds(0, 0, mDrawable.getIntrinsicWidth(), mDrawable.getIntrinsicHeight());
         setCompoundDrawables(icons[0], icons[1], icons[2], icons[3]);
@@ -45,7 +45,7 @@ public class DEView extends android.support.v7.widget.AppCompatEditText {
 
     //隐藏删除按钮并且删除监听
     public void hideDelete() {
-        Drawable[] icons = getCompoundDrawables();
+        final Drawable[] icons = getCompoundDrawables();
         icons[2] = null;
         setCompoundDrawables(icons[0], icons[1], icons[2], icons[3]);
         isListener = false;
@@ -58,6 +58,10 @@ public class DEView extends android.support.v7.widget.AppCompatEditText {
         int y = (int) event.getY();
         if (getCompoundDrawables()[2] == null) {
             return super.onTouchEvent(event);
+        }
+        setError(null);
+        if (!getText().toString().isEmpty()) {
+            showDelete();
         }
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:

@@ -23,16 +23,16 @@ public class DETextChangeListener implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        String text = s.toString();
+        String text = mDEView.getText().toString();
         if (text.isEmpty()) {
             mDEView.hideDelete();
         } else {
             mDEView.showDelete();
         }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
